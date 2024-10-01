@@ -23,4 +23,16 @@
   - Visibilidad
   - Fácil de Modificar
   - Fiabilidad
+- Resources (recursos)
+  - Cada recurso se identifica con una URL
+- Verbos HTTP
+  - Para definir las operaciones que se pueden realizar con los recursos
+- Representaciones
+  - JSON, XML, HTML, etc.
+  - El cliente debería poder decidir la representación del recurso.
+- Stateles
+  -  El cliente debe enviar toda la información necesaria para procesar la request.
+- Interfaz uniforme
+- Separación de conceptos
+  - Permite que el cliente y servidor, evolucionen de forma separada.
 - 
