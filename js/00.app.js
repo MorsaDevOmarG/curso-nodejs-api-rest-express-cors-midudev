@@ -17,6 +17,9 @@ app.get('/', (req, res) => {
 
 // Todos los recursos que se identifican con /movies
 app.get('/movies', (req, res) => {
+    // Con esta línea damos acceso y el * indica que todos los origienes diferentes de nuestro origen están permitidos
+    res.header('Access-Control-Allow-Origin', '*');
+    
     const { genre } = req.query;
 
     if (genre) {
