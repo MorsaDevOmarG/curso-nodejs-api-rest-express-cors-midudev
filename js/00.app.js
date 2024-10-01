@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
 app.get('/movies', (req, res) => {
     const origin = req.header('origin');
 
-    if (ACCEPTED_ORIGINS.includes(origin)) {
+    if (ACCEPTED_ORIGINS.includes(origin) || !origin) {
         // Con esta línea damos acceso y el * indica que todos los origienes diferentes de nuestro origen están permitidos
-        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Origin', origin);
     }
 
     const { genre } = req.query;
