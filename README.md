@@ -37,4 +37,15 @@
   - Permite que el cliente y servidor, evolucionen de forma separada.
 - Página de estados HTTP
   - **_http.cat_**
-- 
+- **_ZOD_**
+  - Zod está diseñado para ser lo más amigo al desarrollador posible. El objetivo es eliminar las declaraciones de tipo duplicado. 
+  - Con Zod, declaras validador una vez y Zod inferirá automáticamente el tipo de Escript estático. 
+  - Es fácil componer tipos más simples en estructuras de datos complejas.
+- Otros grandes aspectos:
+    - Cero dependencias
+    - Obras en Node.js y todos los navegadores modernos
+    - Pequeño: 8kb minificado . zipped
+    - Impmutable: métodos (por ejemplo. .optional()) devolver una nueva instancia
+    - Interfaz concisa y encadenable
+    - Enfoque funcional: parse, no validar
+    - Funciona con JavaScript llano también. No necesitas usar TypeScript
