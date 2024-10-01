@@ -4,6 +4,10 @@ const app = express();
 // Ayuda a crear UUID
 const crypto = require('crypto'); // commonJS
 
+const ACCEPTED_ORIGINS = [
+    'http://localhost:5500',
+    'http://localhost:8080',
+]
 
 app.use(express.json()); // Para parsear los JSON en las peticiones POST
 
@@ -17,9 +21,13 @@ app.get('/', (req, res) => {
 
 // Todos los recursos que se identifican con /movies
 app.get('/movies', (req, res) => {
-    // Con esta línea damos acceso y el * indica que todos los origienes diferentes de nuestro origen están permitidos
-    res.header('Access-Control-Allow-Origin', '*');
-    
+    const origin = req.header('origin');
+
+    if (ACCEPTED_ORIGINS.includes(origin)) {
+        // Con esta línea damos acceso y el * indica que todos los origienes diferentes de nuestro origen están permitidos
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+
     const { genre } = req.query;
 
     if (genre) {
