@@ -3,7 +3,7 @@ const movies = require('./movies.json')
 const app = express();
 // Ayuda a crear UUID
 const crypto = require('crypto'); // commonJS
-const z = require('zod');
+
 
 app.use(express.json()); // Para parsear los JSON en las peticiones POST
 
@@ -44,61 +44,20 @@ app.get('/movies/:id', (req, res) => {
 
 // POST
 app.post('/movies', (req, res) => {
-    const movieSchema = z.object( {
-        title: z.string({
-            invalid_type_error: 'Movie title must be a string',
-            required_error: 'Movie title is required'
-        }),
-        year: z.number().int().min(1900).max(2025),
-        director: z.string(),
-        duration: z.number().int().positive(),
-        poster: z.string().url({
-            message: 'Poster must be a valid URL'
-        }),
-        genre: z.array(
-            z.enum(
-                [
-                    'Action',
-                    'Adventure',
-                    'Comedy',
-                    'Drama',
-                    'Family',
-                    'Fantasy',
-                    'Horror',
-                    'Musical',
-                    'Romance',
-                    'Sci-Fi',
-                    'Thriller'
-                ]
-            ),
-            {
-                required_error: 'Movie genre is required',
-                invalid_type_error: 'Movie genre must be an array of strings'
-            }
-        ),
-        rate: z.number().min(0).max(10)
-    });
+    const result = validateMovie(req.body);
 
-    const {
-        title,
-        year,
-        director,
-        duration,
-        poster,
-        genre,
-        rate
-    } = req.body;
+    if (result.error) {
+        return res.status(400).json(
+            {
+                error: result.error.message
+            }
+        );
+    }
 
     const newMovie = {
         // Crea uuid V4
         id: crypto.randomUUID(),
-        title,
-        year,
-        director,
-        duration,
-        poster,
-        genre,
-        rate
+        ...result.data
     };
 
     movies.push(newMovie);
