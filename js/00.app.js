@@ -12,7 +12,29 @@ app.get('/', (req, res) => {
 
 // Todos los recursos que se identifican con /movies
 app.get('/movies', (req, res) => {
+    const { genre } = req.query;
+
+    if (genre) {
+        const filteredMovies = movies.filter(
+            movie => movie.genre.some( g => g.toLowerCase() === genre.toLowerCase() )
+        );
+
+        return res.json(filteredMovies);
+    }
+
     res.json(movies);
+});
+
+// path-to-regexp
+app.get('/movies/:id', (req, res) => {
+    const { id } = req.params;
+    const movie = movies.find(movie => movie.id === id);
+
+    if (movie) return res.json(movie);
+
+    res.status(404).json( {
+        message: 'Película no encontrada'
+    } );
 });
 
 const PORT = process.env.PORT ?? 1234;
