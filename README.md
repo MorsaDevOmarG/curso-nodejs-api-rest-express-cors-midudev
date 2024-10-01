@@ -50,3 +50,18 @@
       - Interfaz concisa y encadenable
       - Enfoque funcional: parse, no validar
       - Funciona con JavaScript llano también. No necesitas usar TypeScript
+- Diferencias entre: PUT, POST, PATCH
+  - **_POST_**
+    - Crear un elemento en el SERVIDOR
+    - Ejemplo
+      - /movies
+  - **_PUT_**
+    - Actualizar un elemento ya existente o crearlo sino existe
+    - Ejemplo
+      - /movies/123-456-789
+  - **_PATCH_** 
+    - Actualizar parcialmente un elemento o recurso
+    - Ejemplo
+      - /movies/123-456-789
+- **Idempotencia**
+  - Propiedad para realizar una acción determinada varias veces y aún así conseguir siempre el mismo resultado que se obtendría al hacerlo una vez
