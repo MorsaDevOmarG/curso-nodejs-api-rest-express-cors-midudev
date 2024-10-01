@@ -35,4 +35,6 @@
 - Interfaz uniforme
 - Separación de conceptos
   - Permite que el cliente y servidor, evolucionen de forma separada.
+- Página de estados HTTP
+  - **_http.cat_**
 - 

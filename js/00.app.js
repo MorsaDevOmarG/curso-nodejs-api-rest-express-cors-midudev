@@ -1,6 +1,10 @@
 const express = require('express'); // commonJS
 const movies = require('./movies.json')
 const app = express();
+// Ayuda a crear UUID
+const crypto = require('crypto'); // commonJS
+
+app.use(express.json()); // Para parsear los JSON en las peticiones POST
 
 app.disable('x-powered-by'); // Deshabilitar el header
 
@@ -36,6 +40,37 @@ app.get('/movies/:id', (req, res) => {
         message: 'Película no encontrada'
     } );
 });
+
+// POST
+app.post('/movies', (req, res) => {
+    const {
+        title,
+        year,
+        director,
+        duration,
+        poster,
+        genre,
+        rate
+    } = req.body;
+
+    const newMovie = {
+        // Crea uuid V4
+        id: crypto.randomUUID(),
+        title,
+        year,
+        director,
+        duration,
+        poster,
+        genre,
+        rate
+    };
+
+    movies.push(newMovie);
+
+    // Actualizar la caché del cliene
+    res.status(201).json(newMovie);
+});
+
 
 const PORT = process.env.PORT ?? 1234;
 

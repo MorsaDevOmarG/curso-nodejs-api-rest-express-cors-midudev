@@ -6,3 +6,20 @@ GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 
 #Recuperar todos los datos de algo en especifíco
 GET http://localhost:1234/movies?genre=Action
+
+
+# POST, Crear películas
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+    "title": "The Our Party",
+    "year": 2025,
+    "director": "Omar García",
+    "duration": 112,
+    "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
+    "genre": [
+    "Romantic"
+    ],
+    "rate": 10
+},
