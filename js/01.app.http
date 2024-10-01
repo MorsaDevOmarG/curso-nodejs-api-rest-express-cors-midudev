@@ -7,7 +7,6 @@ GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 #Recuperar todos los datos de algo en especifíco
 GET http://localhost:1234/movies?genre=Action
 
-
 # POST, Crear películas
 POST http://localhost:1234/movies
 Content-Type: application/json
@@ -22,4 +21,14 @@ Content-Type: application/json
     "Romantic"
     ],
     "rate": 10
-},
+};
+
+
+# PATCH, Actualizar películas
+PATCH http://localhost:1234/movies/uuid
+
+Content-Type: application/json
+
+{
+    "year": 2015,
+};

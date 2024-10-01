@@ -46,7 +46,7 @@ app.get('/movies/:id', (req, res) => {
 app.post('/movies', (req, res) => {
     const result = validateMovie(req.body);
 
-    if (result.error) {
+    if (!result.success) {
         return res.status(400).json(
             {
                 error: result.error.message
@@ -66,6 +66,34 @@ app.post('/movies', (req, res) => {
     res.status(201).json(newMovie);
 });
 
+// PATCH
+app.patch('/movies/:id', (req, res) => {
+    const result = validatePartialMovie(req.body);
+    
+    if (!result.success) {
+        return res.status(400).json(
+            {
+                error: result.error.message
+            }
+        );
+    }
+    
+    const { id } = req.params;
+    const movieIndex = movies.findIndex(movie => movie.id === id);
+
+    if (movieIndex === -1) {
+        return res.status(404).json( {
+            message: 'Película no encontrada'
+        } );
+    }
+
+    const updateMovie = {
+        ...movies[movieIndex],
+        ...result.data
+    };
+
+    return res.json(updateMovie);
+});
 
 const PORT = process.env.PORT ?? 1234;
 

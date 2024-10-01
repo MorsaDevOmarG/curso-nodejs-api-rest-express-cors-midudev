@@ -36,10 +36,15 @@ const movieSchema = z.object( {
     rate: z.number().min(0).max(10)
 });
 
-function validateMovie(object) {
-    return movieSchema.safeParse(object);
+function validateMovie(input) {
+    return movieSchema.safeParse(input);
+}
+
+function validatePartialMovie(input) {
+    return movieSchema.partial().safeParse(input);
 }
 
 module.exports = {
-    validateMovie
+    validateMovie,
+    validatePartialMovie
 };
